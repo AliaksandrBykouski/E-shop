@@ -12,6 +12,7 @@
     "bootstrap": "^5.3.7",
     "effector": "^23.4.2",
     "effector-react": "^23.3.0",
+    "framer-motion": "^12.23.12",
     "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"

@@ -33,7 +33,7 @@ const Header = () => {
             <button
               className='btn-reset header__links__item__btn header__links__item__btn--search'
               type='button'
-            ></button>
+            />
           </li>
           <li className='header__links__item'>
             <Link
