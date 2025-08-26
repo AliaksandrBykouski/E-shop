@@ -1,8 +1,5 @@
+import MainPage from '@/componenets/templates/MainPage/MainPage'
 
 export default function Home() {
-  return (
-    <div >
-      <h1>Hello Beer</h1>
-    </div>
-  );
+  return <MainPage />
 }
