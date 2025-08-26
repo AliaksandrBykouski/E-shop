@@ -3,8 +3,9 @@ import { useLang } from '../../../hooks/useLang'
 import Logo from '../../elements/Logo'
 import Link from 'next/link'
 import Menu from './Menu'
-import { openMenu } from '@/context/madals'
+import { $searchModal, openMenu, openSearchModal } from '@/context/modals'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
+import { useUnit } from 'effector-react'
 
 const Header = () => {
   const { lang, translations } = useLang()
@@ -12,6 +13,11 @@ const Header = () => {
   const handleOpenMenu = () => {
     addOverflowHiddenToBody()
     openMenu()
+  }
+
+  const handleOpenSearchModal = () => {
+    openSearchModal()
+    addOverflowHiddenToBody()
   }
 
   return (
@@ -33,6 +39,7 @@ const Header = () => {
             <button
               className='btn-reset header__links__item__btn header__links__item__btn--search'
               type='button'
+              onClick={handleOpenSearchModal}
             />
           </li>
           <li className='header__links__item'>

@@ -1,7 +1,7 @@
 import { useLang } from '@/hooks/useLang'
 import { useState } from 'react'
 import { useUnit } from 'effector-react/effector-react.umd'
-import { $menuIsOpen, closeMenu } from '@/context/madals'
+import { $menuIsOpen, closeMenu } from '@/context/modals'
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
 import { setLang } from '@/context/lang'
 import { AllowedLangs } from '@/constans/lang'
