@@ -6,6 +6,7 @@ import './globalStyles/menu.css'
 import './globalStyles/mobile-navbar.css'
 import './globalStyles/catalog-menu.css'
 import './globalStyles/search-modal.css'
+import './globalStyles/cart-popup.css'
 import Layout from '@/componenets/layouts/Layout'
 import React from 'react'
 

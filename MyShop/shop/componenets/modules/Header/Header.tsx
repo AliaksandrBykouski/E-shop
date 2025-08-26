@@ -3,9 +3,9 @@ import { useLang } from '../../../hooks/useLang'
 import Logo from '../../elements/Logo'
 import Link from 'next/link'
 import Menu from './Menu'
-import { $searchModal, openMenu, openSearchModal } from '@/context/modals'
+import { openMenu, openSearchModal } from '@/context/modals'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
-import { useUnit } from 'effector-react'
+import CartPopup from './CartPopup/CartPopup'
 
 const Header = () => {
   const { lang, translations } = useLang()
@@ -55,10 +55,7 @@ const Header = () => {
             />
           </li>
           <li className='header__links__item'>
-            <Link
-              href='/cart'
-              className='header__links__item__btn header__links__item__btn--cart'
-            />
+            <CartPopup />
           </li>
           <li className='header__links__item header__links__item__btn--profile'>
             <Link
