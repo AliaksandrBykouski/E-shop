@@ -1,4 +1,4 @@
-import Logo from '@/componenets/elements/Logo'
+import Logo from '@/componenets/elements/Logo/Logo'
 import { useLang } from '@/hooks/useLang'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import FooterLinks from './FooterLinks'

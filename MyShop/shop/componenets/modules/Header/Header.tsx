@@ -1,6 +1,6 @@
 'use client'
 import { useLang } from '../../../hooks/useLang'
-import Logo from '../../elements/Logo'
+import Logo from '../../elements/Logo/Logo'
 import Link from 'next/link'
 import Menu from './Menu'
 import { openMenu, openSearchModal } from '@/context/modals'

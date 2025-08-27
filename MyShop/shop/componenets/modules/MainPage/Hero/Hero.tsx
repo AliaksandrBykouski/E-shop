@@ -31,11 +31,6 @@ const Hero = () => {
       title: `${translations[lang].main_page.tShirt} «Line» ${translations[lang].main_page.violet}`,
       image: img3,
     },
-    {
-      id: 4,
-      title: `${translations[lang].main_page.tShirt} «Line» ${translations[lang].main_page.black}`,
-      image: img1,
-    },
   ]
 
   const handleSlideClick = (e: SwiperType) => e.slideTo(e.clickedIndex)
@@ -59,10 +54,10 @@ const Hero = () => {
           }}
           slidesPerView='auto'
           initialSlide={2}
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          autoplay
           loop={true}
           onClick={handleSlideClick}
-          modules={[EffectCoverflow, Autoplay]}
+          modules={[EffectCoverflow]}
           grabCursor
           centeredSlides
         >
