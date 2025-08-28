@@ -8,6 +8,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint --fix",
+    "prepare": "git config core.hooksPath .git-hooks || echo 'Not in a git repo'",
     "crcmp": "node create-component.js",
     "crstl": "node create-styles.js"
   },
