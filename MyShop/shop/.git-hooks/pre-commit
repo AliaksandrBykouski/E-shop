@@ -1,2 +1,12 @@
 #!/bin/sh
-touch PreCommitHookRan
+echo "🚀 Запускается pre-commit hook (eslint)"
+
+npx eslint .
+
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint нашёл ошибки, коммит отменён!"
+  exit 1
+fi
+
+echo "✅ ESLint прошёл успешно, продолжаем коммит..."
+
