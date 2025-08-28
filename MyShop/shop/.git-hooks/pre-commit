@@ -1,12 +1,24 @@
 #!/bin/sh
-echo "🚀 Запускается pre-commit hook (eslint)"
+echo "🚀 Запускается pre-commit hook (eslint + tsc-files)"
 
-npx eslint .
+# Получаем изменённые (staged) ts/tsx файлы
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.tsx?$')
 
-if [ $? -ne 0 ]; then
-  echo "❌ ESLint нашёл ошибки, коммит отменён!"
-  exit 1
+# Если есть такие файлы → запускаем проверки
+if [ -n "$STAGED_FILES" ]; then
+  echo "🔍 Проверка ESLint..."
+  npx eslint $STAGED_FILES
+  if [ $? -ne 0 ]; then
+    echo "❌ ESLint нашёл ошибки, коммит отменён!"
+    exit 1
+  fi
+
+  echo "🔍 Проверка типов TypeScript..."
+  npx tsc-files --noEmit $STAGED_FILES
+  if [ $? -ne 0 ]; then
+    echo "❌ Ошибки типов, коммит отменён!"
+    exit 1
+  fi
 fi
 
-echo "✅ ESLint прошёл успешно, продолжаем коммит..."
-
+echo "✅ Все проверки пройдены, продолжаем коммит..."
