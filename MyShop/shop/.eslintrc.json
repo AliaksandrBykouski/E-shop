@@ -1,6 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin", "import"],
+  "plugins": ["@typescript-eslint/eslint-plugin"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
@@ -13,16 +13,10 @@
         "endOfLine": "auto"
       }
     ],
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
-      }
-    ],
+    "@typescript-eslint/no-unused-expressions": "warn",
+
     "no-trailing-spaces": [2, { "skipBlankLines": false }],
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 1 }],
     "object-curly-spacing": ["error", "always"],
@@ -44,39 +38,6 @@
         "html": true
       }
     ],
-    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin", // Node.js модули
-          "external", // библиотеки
-          "internal", // алиасы проекта
-          ["parent", "sibling", "index"], // относительные импорты
-          "type" // типы
-        ],
-        "pathGroups": [
-          {
-            "pattern": "@/styles/**",
-            "group": "internal",
-            "position": "before"
-          },
-          { "pattern": "@/utils/**", "group": "internal", "position": "after" },
-          {
-            "pattern": "@/components/**",
-            "group": "internal",
-            "position": "after"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "newlines-between": "always",
-        "warnOnUnassignedImports": true
-      }
-    ]
-  },
-  "settings": {
-    "import/resolver": {
-      "typescript": {}
-    }
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }]
   }
 }

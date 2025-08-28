@@ -1,3 +1,5 @@
+import Layout from '@/components/layouts/Layout'
+
 import type { Metadata } from 'next'
 import './globalStyles/normalize.css'
 import './globalStyles/globals.css'
@@ -8,9 +10,6 @@ import './globalStyles/catalog-menu.css'
 import './globalStyles/search-modal.css'
 import './globalStyles/cart-popup.css'
 import './globalStyles/footer.css'
-
-import Layout from '@/componenets/layouts/Layout'
-import React from 'react'
 
 export const metadata: Metadata = {
   title: 'MyShop',

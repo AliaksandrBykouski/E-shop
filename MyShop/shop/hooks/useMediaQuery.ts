@@ -1,5 +1,6 @@
-import { getWindowWidth } from '@/lib/utils/common'
 import { useEffect, useState } from 'react'
+
+import { getWindowWidth } from '@/lib/utils/common'
 
 const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState(getWindowWidth())
