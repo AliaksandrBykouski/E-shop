@@ -1,12 +1,14 @@
+import { CustomArrowProps } from 'react-slick'
+
 export interface IProductSubtitleProps {
-  subtitleClassName: string
+  subtitleClassName?: string
   subtitleRectClassName?: string
 }
 
 export interface IProductItemActionBtnProps {
   text: string
   iconClass: string
-  callback?: () => VoidFunction
+  callback?: () => void
   marginBottom?: number
   spinner?: boolean
   withTooltip?: boolean
@@ -15,4 +17,8 @@ export interface IProductItemActionBtnProps {
 export interface IProductAvailableProps {
   vendorCode: string
   inStock: number
+}
+
+export interface IQuickViewModalSliderArrowProps extends CustomArrowProps {
+  directionClassName: string
 }

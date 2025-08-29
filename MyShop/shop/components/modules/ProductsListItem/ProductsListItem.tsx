@@ -2,7 +2,7 @@
 import { IProductsListItemProps } from '@/types/modules'
 import { useLang } from '@/hooks/useLang'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { formatPrice } from '@/lib/utils/common'
+import { addOverflowHiddenToBody, formatPrice } from '@/lib/utils/common'
 import Link from 'next/link'
 import ProductSubtitle from '@/components/elements/ProductSubtitle/ProductSubtitle'
 import Image from 'next/image'
@@ -11,11 +11,19 @@ import styles from '@/styles/product-list-item/index.module.scss'
 import stylesForAd from '@/styles/ad/index.module.scss'
 import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn'
 import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable'
+import { showQuickViewModal } from '@/context/modals'
+import { setCurrentProduct } from '@/context/goods'
 
 const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
   const { lang, translations } = useLang()
   const isTitleForNew = title === translations[lang].main_page.new_title
   const isMedia800 = useMediaQuery(800)
+
+  const handleShowQuickViewModal = () => {
+    addOverflowHiddenToBody()
+    showQuickViewModal()
+    setCurrentProduct(item)
+  }
 
   return (
     <>
@@ -89,6 +97,7 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
               <ProductItemActionBtn
                 text={translations[lang].product.quick_view}
                 iconClass='actions__btn_quick_view'
+                callback={handleShowQuickViewModal}
               />
             )}
           </div>
