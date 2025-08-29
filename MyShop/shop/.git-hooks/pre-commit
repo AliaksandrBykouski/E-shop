@@ -1,10 +1,9 @@
 #!/bin/sh
-echo "🚀 Запускается pre-commit hook (eslint + tsc-files)"
+echo "🚀 Запускается pre-commit hook (eslint + tsc-files только по staged файлам)"
 
-# Получаем изменённые (staged) ts/tsx файлы
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.tsx?$')
+# Получаем staged JS/TS файлы
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|jsx|tsx)$')
 
-# Если есть такие файлы → запускаем проверки
 if [ -n "$STAGED_FILES" ]; then
   echo "🔍 Проверка ESLint..."
   npx eslint $STAGED_FILES
@@ -21,4 +20,4 @@ if [ -n "$STAGED_FILES" ]; then
   fi
 fi
 
-echo "✅ Все проверки пройдены, продолжаем коммит..."
+echo "✅ Все staged-файлы прошли проверки, продолжаем коммит..."

@@ -39,7 +39,7 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
                 alt={item.name}
                 width={224}
                 height={275}
-                objectFit='contain'
+                style={{ objectFit: 'contain' }}
               />
             </div>
             <p className={styles.list__item_ad__title}>
@@ -100,7 +100,7 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
               src={item.images[0]}
               alt={item.name}
               fill
-              objectFit='contain'
+              style={{ objectFit: 'contain' }}
             />
           </Link>
           <div className={styles.list__item__inner}>
