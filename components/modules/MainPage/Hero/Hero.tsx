@@ -66,7 +66,12 @@ const Hero = () => {
           centeredSlides
         >
           {slides.map((slide) => (
-            <SwiperSlide className={styles.hero__slider__slide} key={slide.id}>
+            <SwiperSlide
+              className={styles.hero__slider__slide}
+              key={slide.id}
+              style={{ zIndex: 10 }}
+              data-test-id='slide-button'
+            >
               <HeroSlide slide={slide} />
             </SwiperSlide>
           ))}
