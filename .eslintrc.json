@@ -1,0 +1,90 @@
+{
+  "ignorePatterns": ["*.d.ts"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint/eslint-plugin", "import"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-expressions": "off",
+
+    "no-trailing-spaces": [2, { "skipBlankLines": false }],
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 1 }],
+    "object-curly-spacing": ["error", "always"],
+    "comma-spacing": [2, { "before": false, "after": true }],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "space-infix-ops": ["error", { "int32Hint": false }],
+    "space-after-keywords": "off",
+    "keyword-spacing": [2, { "before": true, "after": true }],
+    "arrow-body-style": ["error", "as-needed"],
+    "padded-blocks": ["error", "never"],
+    "semi": ["error", "never"],
+    "max-len": ["error", { "code": 120 }],
+    "indent": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "@next/next/no-img-element": "off",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin", // node: fs, path
+          "external", // react, next, effector
+          "internal", // @/...
+          ["parent", "sibling"], // ../ ./
+          "index", // index.ts
+          "object", // импорт JSON
+          "type" // типы
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "effector",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ]
+  }
+}

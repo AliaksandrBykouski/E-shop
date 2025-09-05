@@ -1,0 +1,30 @@
+#!/bin/sh
+echo "🚀 Запускается pre-commit hook (eslint + TypeScript только по staged файлам)"
+
+# Папка с package.json
+CD_DIR="shop"
+cd "$CD_DIR" || exit 1
+
+# Получаем staged JS/TS файлы внутри shop/ и оставляем пути относительно shop/
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^shop/.*\.(js|ts|jsx|tsx)$' | sed "s|^shop/||")
+
+if [ -n "$STAGED_FILES" ]; then
+  echo "🔍 Проверка ESLint на staged файлах..."
+  yarn eslint --fix $STAGED_FILES
+  if [ $? -ne 0 ]; then
+    echo "❌ ESLint нашёл ошибки, коммит отменён!"
+    exit 1
+  fi
+else
+  echo "ℹ️ Нет staged JS/TS файлов для проверки ESLint"
+fi
+
+# Проверка TypeScript внутри shop/
+echo "🔍 Проверка типов TypeScript..."
+yarn tsc --noEmit
+if [ $? -ne 0 ]; then
+  echo "❌ Ошибки типов, коммит отменён!"
+  exit 1
+fi
+
+echo "✅ Все проверки пройдены, продолжаем коммит..."

@@ -1,0 +1,17 @@
+# node_modules и билд
+node_modules
+.next
+out
+dist
+build
+
+# окружение и конфиги
+.env*
+coverage
+.vscode
+
+# JS/TS декларации и типы
+*.d.ts
+
+# лог файлы
+*.log
