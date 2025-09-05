@@ -58,7 +58,7 @@ const Hero = () => {
           slidesPerView='auto'
           initialSlide={2}
           autoplay
-          style={{ zIndex: 10 }}
+          style={{ zIndex: 100 }}
           loop={true}
           onClick={handleSlideClick}
           modules={[EffectCoverflow]}
@@ -69,7 +69,7 @@ const Hero = () => {
             <SwiperSlide
               className={styles.hero__slider__slide}
               key={slide.id}
-              style={{ zIndex: 10 }}
+              style={{ zIndex: 100 }}
               data-test-id='slide-button'
             >
               <HeroSlide slide={slide} />
