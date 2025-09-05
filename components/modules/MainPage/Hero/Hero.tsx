@@ -58,6 +58,7 @@ const Hero = () => {
           slidesPerView='auto'
           initialSlide={2}
           autoplay
+          style={{ zIndex: 10 }}
           loop={true}
           onClick={handleSlideClick}
           modules={[EffectCoverflow]}
