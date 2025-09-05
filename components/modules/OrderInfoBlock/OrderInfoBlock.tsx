@@ -2,23 +2,21 @@ import { MutableRefObject, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { useCartByAuth } from '@/hooks/useCartByAuth'
 import { useLang } from '@/hooks/useLang'
 import { useTotalPrice } from '@/hooks/useTotalPrice'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
 import { formatPrice, showCountMessage } from '@/lib/utils/common'
 import styles from '@/styles/order-block/index.module.scss'
 import { IOrderInfoBlockProps } from '@/types/modules'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { $cart, $cartFromLS } from '@/context/cart'
 
 const OrderInfoBlock = ({
   isCorrectPromotionalCode,
   isOrderPage,
 }: IOrderInfoBlockProps) => {
   const { lang, translations } = useLang()
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
   const [isUserAgree, setIsUserAgree] = useState(false)
   const { animatedPrice } = useTotalPrice()
   const checkboxRef = useRef() as MutableRefObject<HTMLInputElement>

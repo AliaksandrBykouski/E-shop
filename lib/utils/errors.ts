@@ -6,6 +6,11 @@ import {
   deleteCartItemFx,
   getCartItemsFx,
 } from '@/api/cart'
+import {
+  addProductsFromLSToFavoritesFx,
+  addProductToFavoriteFx,
+  getFavoriteItemsFx,
+} from '@/context/favorites'
 import { JWTError } from '@/constants/jwt'
 import { addProductsFromLSToCartFx } from '@/context/cart'
 import {
@@ -13,6 +18,7 @@ import {
   IAddProductToCartFx,
   IDeleteCartItemsFx,
 } from '@/types/cart'
+import { IAddProductsFromLSToFavoriteFx } from '@/types/favorites'
 
 export const handleJWTError = async (
   errorName: string,
@@ -46,6 +52,20 @@ export const handleJWTError = async (
         case 'deleteCartItemFx':
           return deleteCartItemFx({
             ...(payload as IDeleteCartItemsFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'addProductToFavoriteFx':
+          return addProductToFavoriteFx({
+            ...(payload as Omit<IAddProductToCartFx, 'count'>),
+            jwt: newTokens.accessToken,
+          })
+        case 'getFavoriteItemsFx':
+          return getFavoriteItemsFx({
+            jwt: newTokens.accessToken,
+          })
+        case 'addProductsFromLSToFavoritesFx':
+          return addProductsFromLSToFavoritesFx({
+            ...(payload as IAddProductsFromLSToFavoriteFx),
             jwt: newTokens.accessToken,
           })
         case 'loginCheckFx':
@@ -114,21 +134,6 @@ export const handleJWTError = async (
         //     jwt: newTokens.accessToken,
         //   })
         //   break
-
-        // case 'addProductToFavoriteFx':
-        //   return addProductToFavoriteFx({
-        //     ...(payload as Omit<IAddProductToCartFx, 'count'>),
-        //     jwt: newTokens.accessToken,
-        //   })
-        // case 'getFavoriteItemsFx':
-        //   return getFavoriteItemsFx({
-        //     jwt: newTokens.accessToken,
-        //   })
-        // case 'addProductsFromLSToFavoritesFx':
-        //   return addProductsFromLSToFavoritesFx({
-        //     ...(payload as IAddProductsFromLSToFavoriteFx),
-        //     jwt: newTokens.accessToken,
-        //   })
         // case 'deleteFavoriteItemFx':
         //   return deleteFavoriteItemFx({
         //     ...(payload as IDeleteFavoriteItemsFx),

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 
 import { useUnit } from 'effector-react'
 
-import { updateCartItemCount } from '@/context/cart'
+import { $cart, $cartFromLS, updateCartItemCount } from '@/context/cart'
 import { $currentProduct } from '@/context/goods'
 import {
   addCartItemToLS,
@@ -10,13 +10,12 @@ import {
   addProductToCartBySizeTable,
 } from '@/lib/utils/cart'
 import { isUserAuth } from '@/lib/utils/common'
-
-import { useCartByAuth } from './useCartByAuth'
+import { useGoodsByAuth } from './useGoodsByAuth'
 
 export const useCartAction = (isSizeTablet = false) => {
   const product = useUnit($currentProduct)
   const [selectedSize, setSelectedSize] = useState('')
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
   const currentCartItems = currentCartByAuth.filter(
     (item) => item.productId === product._id
   )

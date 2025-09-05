@@ -1,13 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { basePropsForMotion } from '@/constants/motion'
-import { useCartByAuth } from '@/hooks/useCartByAuth'
 import styles from '@/styles/cart-page/index.module.scss'
 
 import CartListItem from './CartListItem'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { $cart, $cartFromLS } from '@/context/cart'
 
 const CartList = () => {
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
 
   return (
     <>

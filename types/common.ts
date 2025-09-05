@@ -39,7 +39,7 @@ export interface IBaseEffectProps {
   setSpinner: (arg0: boolean) => void
 }
 
-export type UseGoodsByAuth<T> = StoreWritable<T>
+export type UseGoodsByAuth<T> = StoreWritable<T[]>
 
 export interface IGetGeolocationFx {
   lat: number

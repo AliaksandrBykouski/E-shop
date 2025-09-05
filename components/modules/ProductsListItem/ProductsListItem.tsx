@@ -25,6 +25,8 @@ import styles from '@/styles/product-list-item/index.module.scss'
 import { IProductsListItemProps } from '@/types/modules'
 
 import ProductLabel from './ProductLabel'
+import { setIsAddToFavorites } from '@/context/favorites'
+import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 
 const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
   const { lang, translations } = useLang()
@@ -33,6 +35,11 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
   const { addToCartSpinner, setAddToCartSpinner, currentCartByAuth } =
     useCartAction()
   const isProductInCart = isItemInList(currentCartByAuth, item._id)
+  const {
+    addToFavoritesSpinner,
+    handleAddProductToFavorites,
+    isProductInFavorites,
+  } = useFavoritesAction(item)
 
   const handleShowQuickViewModal = () => {
     addOverflowHiddenToBody()
@@ -41,6 +48,7 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
   }
 
   const addToCart = () => {
+    setIsAddToFavorites(false)
     addProductToCartBySizeTable(item, setAddToCartSpinner, 1)
   }
 
@@ -105,8 +113,10 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
           )}
           <div className={styles.list__item__actions}>
             <ProductItemActionBtn
+              spinner={addToFavoritesSpinner}
               text={translations[lang].product.add_to_favorites}
-              iconClass='actions__btn_favorite'
+              iconClass={`${isProductInFavorites ? 'actions__btn_favorite_checked' : 'actions__btn_favorite'}`}
+              callback={handleAddProductToFavorites}
             />
             <ProductItemActionBtn
               text={translations[lang].product.add_to_comparison}

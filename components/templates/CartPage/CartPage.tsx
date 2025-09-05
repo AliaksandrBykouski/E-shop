@@ -12,18 +12,18 @@ import PromotionalCode from '@/components/modules/CartPage/PromotionalCode'
 import EmptyPageContent from '@/components/modules/EmptyPageContent/EmptyPageContent'
 import OrderInfoBlock from '@/components/modules/OrderInfoBlock/OrderInfoBlock'
 import { basePropsForMotion } from '@/constants/motion'
-import { $shouldShowEmpty } from '@/context/cart'
+import { $cart, $cartFromLS, $shouldShowEmpty } from '@/context/cart'
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
-import { useCartByAuth } from '@/hooks/useCartByAuth'
 import { useLang } from '@/hooks/useLang'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
 import styles from '@/styles/cart-page/index.module.scss'
 import cartSkeletonStyles from '@/styles/cart-skeleton/index.module.scss'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 
 const CartPage = () => {
   const cartSpinner = useUnit(getCartItemsFx.pending)
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
   const { lang, translations } = useLang()
   const { getDefaultTextGenerator, getTextGenerator } = useBreadcrumbs('cart')
   const isMedia930 = useMediaQuery(930)

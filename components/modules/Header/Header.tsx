@@ -10,13 +10,14 @@ import { useUnit } from 'effector-react'
 import { loginCheckFx } from '@/api/authFx'
 import { $isAuth } from '@/context/auth'
 import {
+  $cart,
+  $cartFromLS,
   addProductsFromLSToCart,
   setCartFromLS,
   setShouldShowEmpty,
 } from '@/context/cart'
 import { setLang } from '@/context/lang'
 import { openMenu, openSearchModal } from '@/context/modals'
-import { useCartByAuth } from '@/hooks/useCartByAuth'
 import {
   addOverflowHiddenToBody,
   handleOpenAuthPopup,
@@ -28,13 +29,15 @@ import HeaderProfile from './HeaderProfile'
 import Menu from './Menu'
 import { useLang } from '../../../hooks/useLang'
 import Logo from '../../elements/Logo/Logo'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { addProductsFromLSToFavorites } from '@/context/favorites'
 
 const Header = () => {
   const isAuth = useUnit($isAuth)
   const { lang, translations } = useLang()
   const loginCheckSpinner = useUnit(loginCheckFx.pending)
   // const user = useUnit($user)
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
 
   const handleOpenMenu = () => {
     addOverflowHiddenToBody()
@@ -92,12 +95,12 @@ const Header = () => {
         })
       }
 
-      // if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-      //   addProductsFromLSToFavorites({
-      //     jwt: auth.accessToken,
-      //     favoriteItems: favoritesFromLS,
-      //   })
-      // }
+      if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+        addProductsFromLSToFavorites({
+          jwt: auth.accessToken,
+          favoriteItems: favoritesFromLS,
+        })
+      }
 
       // if (comparisonFromLS && Array.isArray(comparisonFromLS)) {
       //   addProductsFromLSToComparison({

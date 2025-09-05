@@ -7,15 +7,16 @@ import {
   openCatalogMenu,
   openMenu,
 } from '@/context/modals'
-import { useCartByAuth } from '@/hooks/useCartByAuth'
 import { useLang } from '@/hooks/useLang'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
 
 import CatalogMenu from '../Header/CatalogMenu'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { $cart, $cartFromLS } from '@/context/cart'
 
 const MobileNavbar = () => {
   const { lang, translations } = useLang()
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
 
   const handleOpenMenu = () => {
     addOverflowHiddenToBody()
