@@ -9,9 +9,11 @@ import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvai
 import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn'
 import ProductSubtitle from '@/components/elements/ProductSubtitle/ProductSubtitle'
 import { productsWithoutSizes } from '@/constants/product'
+import { setIsAddToFavorites } from '@/context/favorites'
 import { setCurrentProduct } from '@/context/goods'
 import { showQuickViewModal } from '@/context/modals'
 import { useCartAction } from '@/hooks/useCartAction'
+import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { useLang } from '@/hooks/useLang'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { addProductToCartBySizeTable } from '@/lib/utils/cart'
@@ -25,8 +27,6 @@ import styles from '@/styles/product-list-item/index.module.scss'
 import { IProductsListItemProps } from '@/types/modules'
 
 import ProductLabel from './ProductLabel'
-import { setIsAddToFavorites } from '@/context/favorites'
-import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 
 const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
   const { lang, translations } = useLang()
@@ -115,7 +115,13 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
             <ProductItemActionBtn
               spinner={addToFavoritesSpinner}
               text={translations[lang].product.add_to_favorites}
-              iconClass={`${isProductInFavorites ? 'actions__btn_favorite_checked' : 'actions__btn_favorite'}`}
+              iconClass={`${
+                addToFavoritesSpinner
+                  ? 'actions__btn_spinner'
+                  : isProductInFavorites
+                    ? 'actions__btn_favorite_checked'
+                    : 'actions__btn_favorite'
+              }`}
               callback={handleAddProductToFavorites}
             />
             <ProductItemActionBtn

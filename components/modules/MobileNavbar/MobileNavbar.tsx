@@ -1,22 +1,24 @@
 'use client'
 import Link from 'next/link'
 
+import { $cart, $cartFromLS } from '@/context/cart'
+import { $favorites, $favoritesFromLS } from '@/context/favorites'
 import {
   closeCatalogMenu,
   closeMenu,
   openCatalogMenu,
   openMenu,
 } from '@/context/modals'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useLang } from '@/hooks/useLang'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
 
 import CatalogMenu from '../Header/CatalogMenu'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLS } from '@/context/cart'
 
 const MobileNavbar = () => {
   const { lang, translations } = useLang()
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLS)
+  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
 
   const handleOpenMenu = () => {
     addOverflowHiddenToBody()
@@ -40,11 +42,13 @@ const MobileNavbar = () => {
         <button
           className='btn-reset mobile-navbar__btn'
           onClick={handleOpenCatalogMenu}
-          aria-label='Open catalog menu'
         >
           {translations[lang].breadcrumbs.catalog}
         </button>
         <Link className='btn-reset mobile-navbar__btn' href='/favorites'>
+          {!!currentFavoritesByAuth.length && (
+            <span className='not-empty not-empty-mobile-favorite' />
+          )}
           {translations[lang].breadcrumbs.favorites}
         </Link>
         <Link className='btn-reset mobile-navbar__btn' href='/cart'>
@@ -56,7 +60,6 @@ const MobileNavbar = () => {
         <button
           className='btn-reset mobile-navbar__btn'
           onClick={handleOpenMenu}
-          aria-label='Open main menu'
         >
           {translations[lang].common.more}
         </button>

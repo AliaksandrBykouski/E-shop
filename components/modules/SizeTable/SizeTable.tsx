@@ -1,26 +1,24 @@
-import { useState } from 'react'
-
 import { useUnit } from 'effector-react'
+import toast from 'react-hot-toast'
 
-import { $showQuickViewModal } from '@/context/modals'
-import { $sizeTableSizes } from '@/context/sizeTable'
-import { useCartAction } from '@/hooks/useCartAction'
-import { useLang } from '@/hooks/useLang'
-import { closeSizeTableByCheck, isUserAuth } from '@/lib/utils/common'
-import styles from '@/styles/size-table/index.module.scss'
-
-import AddToCartBtn from '../ProductsListItem/AddToCartBtn'
-import ProductCountBySize from '../ProductsListItem/ProductCountBySize'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import {
   $favorites,
   $favoritesFromLS,
   $isAddToFavorites,
   addProductToFavorites,
 } from '@/context/favorites'
-import { addFavoriteItemToLS } from '@/lib/utils/favorites'
-import toast from 'react-hot-toast'
+import { $showQuickViewModal } from '@/context/modals'
+import { $sizeTableSizes } from '@/context/sizeTable'
+import { useCartAction } from '@/hooks/useCartAction'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { useLang } from '@/hooks/useLang'
+import { closeSizeTableByCheck, isUserAuth } from '@/lib/utils/common'
+import { addFavoriteItemToLS } from '@/lib/utils/favorites'
+import styles from '@/styles/size-table/index.module.scss'
+
+import AddToCartBtn from '../ProductsListItem/AddToCartBtn'
+import ProductCountBySize from '../ProductsListItem/ProductCountBySize'
 
 const SizeTable = () => {
   const { lang, translations } = useLang()
@@ -326,7 +324,7 @@ const SizeTable = () => {
         addToCartSpinner={
           addToCartSpinner || updateCountSpinner || addToFavoritesSpinner
         }
-        className={styles.size_table__btn}
+        className={`${styles.size_table__btn} ${styles.size_table__btn_favorite}`}
         btnDisabled={
           !!selectedSize ||
           addToCartSpinner ||

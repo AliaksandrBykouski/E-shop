@@ -1,8 +1,13 @@
 import toast from 'react-hot-toast'
+
+import {
+  setFavoritesFromLS,
+  setShouldShowEmptyFavorites,
+} from '@/context/favorites'
 import { IProduct } from '@/types/common'
-import { idGenerator } from './common'
-import { setFavoritesFromLS } from '@/context/favorites'
 import { IFavoriteItem } from '@/types/favorites'
+
+import { idGenerator } from './common'
 
 export const addFavoriteItemToLS = (
   product: IProduct,
@@ -18,6 +23,8 @@ export const addFavoriteItemToLS = (
   if (!favoritesFromLS) {
     favoritesFromLS = []
   }
+
+  setShouldShowEmptyFavorites(false)
 
   const existingItem = favoritesFromLS.find(
     (item) => item.productId === product._id && item.size === selectedSize

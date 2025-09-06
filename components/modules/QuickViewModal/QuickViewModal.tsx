@@ -29,7 +29,6 @@ const QuickViewModal = () => {
     addToCartSpinner,
     updateCountSpinner,
     allCurrentCartItemCount,
-    cartItemBySize,
     currentCartItems,
     existingItem,
     setCount,

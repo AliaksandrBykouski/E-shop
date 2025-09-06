@@ -3,6 +3,8 @@ import { forwardRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { withClickOutside } from '@/components/hocs/withClickOutside'
@@ -15,7 +17,7 @@ const HeaderProfile = forwardRef<HTMLDivElement, IWrappedComponentProps>(
   ({ open, setOpen }, ref) => {
     const handleTogglePopup = () => setOpen(!open)
     const handleLogout = useUserLogout()
-    const { src, alt, initials } = useUserAvatar()
+    const { src, alt, initials, isLoading } = useUserAvatar()
     const { lang, translations } = useLang()
 
     return (
@@ -25,7 +27,9 @@ const HeaderProfile = forwardRef<HTMLDivElement, IWrappedComponentProps>(
           onClick={handleTogglePopup}
           aria-label='User profile menu'
         >
-          {src ? (
+          {isLoading ? (
+            <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
+          ) : src ? (
             <Image src={src} alt={alt || 'profile'} width={24} height={24} />
           ) : (
             <div

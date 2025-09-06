@@ -1,5 +1,7 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import styles from '@/styles/product-item-action-btn/index.module.scss'
@@ -7,8 +9,6 @@ import tooltipStyles from '@/styles/tooltip/index.module.scss'
 import { IProductItemActionBtnProps } from '@/types/elements'
 
 import Tooltip from '../Tooltip/Tooltip'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const ProductItemActionBtn = ({
   text,

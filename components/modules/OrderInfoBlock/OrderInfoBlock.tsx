@@ -2,14 +2,14 @@ import { MutableRefObject, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
+import { $cart, $cartFromLS } from '@/context/cart'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useLang } from '@/hooks/useLang'
 import { useTotalPrice } from '@/hooks/useTotalPrice'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
 import { formatPrice, showCountMessage } from '@/lib/utils/common'
 import styles from '@/styles/order-block/index.module.scss'
 import { IOrderInfoBlockProps } from '@/types/modules'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLS } from '@/context/cart'
 
 const OrderInfoBlock = ({
   isCorrectPromotionalCode,

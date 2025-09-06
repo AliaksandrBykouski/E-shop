@@ -1,13 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
-
-import { usePathname } from 'next/navigation'
+import { useCallback, useEffect } from 'react'
 
 import { useCrumbText } from './UseCrumbText'
-import { useLang } from './useLang'
 import { usePageTitle } from './UsePageTitle'
 
 export const useBreadcrumbs = (page: string) => {
-  const { lang, translations } = useLang()
   const { crumbText } = useCrumbText(page)
   const getDefaultTextGenerator = useCallback(() => crumbText, [crumbText])
   const getTextGenerator = useCallback((param: string) => ({})[param], [])

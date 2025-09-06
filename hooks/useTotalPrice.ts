@@ -4,8 +4,8 @@ import { useUnit } from 'effector-react'
 
 import { $cart, $cartFromLS, $totalPrice, setTotalPrice } from '@/context/cart'
 
-import { usePriceAnimation } from './usePricceAnimation'
 import { useGoodsByAuth } from './useGoodsByAuth'
+import { usePriceAnimation } from './usePricceAnimation'
 
 export const useTotalPrice = () => {
   const totalPrice = useUnit($totalPrice)

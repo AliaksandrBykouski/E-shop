@@ -9,14 +9,14 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { getCartItemsFx } from '@/api/cart'
 import { withClickOutside } from '@/components/hocs/withClickOutside'
+import { $cart, $cartFromLS } from '@/context/cart'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useLang } from '@/hooks/useLang'
 import { useTotalPrice } from '@/hooks/useTotalPrice'
 import { formatPrice } from '@/lib/utils/common'
 import { IWrappedComponentProps } from '@/types/hocs'
 
 import CartPopupItem from './CartPopupItem'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLS } from '@/context/cart'
 
 const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(
   ({ open, setOpen }, ref) => {

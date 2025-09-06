@@ -1,7 +1,9 @@
+import { NextResponse } from 'next/server'
+
+import { ObjectId } from 'mongodb'
+
 import clientPromise from '@/lib/mongodb'
 import { getAuthRouteData, parseJwt } from '@/lib/utils/api-routes'
-import { ObjectId } from 'mongodb'
-import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   try {

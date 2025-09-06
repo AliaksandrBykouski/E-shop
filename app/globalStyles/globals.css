@@ -233,12 +233,12 @@ body::-webkit-scrollbar-thumb:hover {
 
 .not-empty-mobile {
   top: 12px;
-  right: 15px;
+  right: 20px;
 }
 
 .not-empty-mobile-favorite {
   top: 12px;
-  right: 25px;
+  right: 20px;
 }
 
 .quick-modal-dots li.slick-active button {

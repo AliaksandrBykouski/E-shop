@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useUnit } from 'effector-react'
 import { motion } from 'framer-motion'
 
+import { loginCheckFx } from '@/api/authFx'
 import { getCartItemsFx } from '@/api/cart'
 import HeadingWithCount from '@/components/elements/HeadingWithCount/HeadingWithCount'
 import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
@@ -14,12 +15,13 @@ import OrderInfoBlock from '@/components/modules/OrderInfoBlock/OrderInfoBlock'
 import { basePropsForMotion } from '@/constants/motion'
 import { $cart, $cartFromLS, $shouldShowEmpty } from '@/context/cart'
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useLang } from '@/hooks/useLang'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
+import { isUserAuth } from '@/lib/utils/common'
 import styles from '@/styles/cart-page/index.module.scss'
 import cartSkeletonStyles from '@/styles/cart-skeleton/index.module.scss'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 
 const CartPage = () => {
   const cartSpinner = useUnit(getCartItemsFx.pending)
@@ -30,6 +32,7 @@ const CartPage = () => {
   const [isCorrectPromotionalCode, setIsCorrectPromotionalCode] =
     useState(false)
   const shouldShowEmpty = useUnit($shouldShowEmpty)
+  const loginCheckSpinner = useUnit(loginCheckFx.pending)
 
   return (
     <main>
@@ -47,7 +50,9 @@ const CartPage = () => {
             />
             <div className={styles.cart__inner}>
               <div className={styles.cart__left}>
-                {cartSpinner && (
+                {(isUserAuth()
+                  ? cartSpinner || loginCheckSpinner
+                  : cartSpinner) && (
                   <motion.ul
                     {...basePropsForMotion}
                     className={cartSkeletonStyles.skeleton}

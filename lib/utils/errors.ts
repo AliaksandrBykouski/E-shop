@@ -6,19 +6,22 @@ import {
   deleteCartItemFx,
   getCartItemsFx,
 } from '@/api/cart'
+import { JWTError } from '@/constants/jwt'
+import { addProductsFromLSToCartFx } from '@/context/cart'
 import {
   addProductsFromLSToFavoritesFx,
   addProductToFavoriteFx,
   getFavoriteItemsFx,
 } from '@/context/favorites'
-import { JWTError } from '@/constants/jwt'
-import { addProductsFromLSToCartFx } from '@/context/cart'
 import {
   IAddProductsFromLSToCartFx,
   IAddProductToCartFx,
   IDeleteCartItemsFx,
 } from '@/types/cart'
-import { IAddProductsFromLSToFavoriteFx } from '@/types/favorites'
+import {
+  IAddProductsFromLSToFavoriteFx,
+  IDeleteFavoriteItemsFx,
+} from '@/types/favorites'
 
 export const handleJWTError = async (
   errorName: string,
@@ -66,6 +69,11 @@ export const handleJWTError = async (
         case 'addProductsFromLSToFavoritesFx':
           return addProductsFromLSToFavoritesFx({
             ...(payload as IAddProductsFromLSToFavoriteFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'deleteFavoriteItemFx':
+          return deleteCartItemFx({
+            ...(payload as IDeleteFavoriteItemsFx),
             jwt: newTokens.accessToken,
           })
         case 'loginCheckFx':
@@ -134,11 +142,6 @@ export const handleJWTError = async (
         //     jwt: newTokens.accessToken,
         //   })
         //   break
-        // case 'deleteFavoriteItemFx':
-        //   return deleteFavoriteItemFx({
-        //     ...(payload as IDeleteFavoriteItemsFx),
-        //     jwt: newTokens.accessToken,
-        //   })
       }
     }
   }
