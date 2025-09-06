@@ -3,8 +3,6 @@ import { EventCallable } from 'effector'
 import toast from 'react-hot-toast'
 
 import { closeAuthPopup, openAuthPopup, setIsAuth } from '@/context/auth'
-import { setShouldShowEmpty } from '@/context/cart'
-import { setShouldShowEmptyFavorites } from '@/context/favorites'
 import { setCurrentProduct } from '@/context/goods'
 import {
   closeSearchModal,
@@ -160,6 +158,7 @@ export const deleteProductFromLS = <T>(
   id: string,
   key: string,
   event: EventCallable<T>,
+  setShouldShowEmpty: (value: boolean) => void,
   message: string,
   withToast = true
 ) => {
@@ -179,7 +178,6 @@ export const deleteProductFromLS = <T>(
 
   if (!updatedItems.length) {
     setShouldShowEmpty(true)
-    setShouldShowEmptyFavorites(true)
   }
 }
 

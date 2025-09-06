@@ -1,6 +1,10 @@
 import { useState } from 'react'
 
-import { deleteProductFromCart, setCartFromLS } from '@/context/cart'
+import {
+  deleteProductFromCart,
+  setCartFromLS,
+  setShouldShowEmpty,
+} from '@/context/cart'
 import { deleteProductFromLS, isUserAuth } from '@/lib/utils/common'
 import { ICartItem } from '@/types/cart'
 
@@ -38,6 +42,7 @@ export const useCartItemAction = (cartItem: ICartItem) => {
         cartItem.clientId,
         'cart',
         setCartFromLS,
+        setShouldShowEmpty,
         'Удалено из карзины!'
       )
       return
@@ -45,7 +50,14 @@ export const useCartItemAction = (cartItem: ICartItem) => {
 
     const auth = JSON.parse(localStorage.getItem('auth') as string)
 
-    deleteProductFromLS(cartItem.clientId, 'cart', setCartFromLS, '', false)
+    deleteProductFromLS(
+      cartItem.clientId,
+      'cart',
+      setCartFromLS,
+      setShouldShowEmpty,
+      '',
+      false
+    )
     deleteProductFromCart({
       jwt: auth.accessToken,
       id: cartItem._id,
